@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,8 +16,8 @@ public class PlayerController : MonoBehaviour
     private float fire;
 
     private float lastFireTime;
-    private float bulletBetTime = 0.25f;
-
+    private float bulletBetTime = 0.125f;
+    private float cullHp = 10f;
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -52,4 +54,15 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(h, v);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Damaged(2);
+    }
+
+    void Damaged(float damage)
+    {
+        cullHp -= damage;
+        playerAnimator.SetTrigger("isDie");
+        Destroy(gameObject);
+    }
 }
