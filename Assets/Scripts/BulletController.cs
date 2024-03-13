@@ -8,18 +8,18 @@ using UnityEngine.UIElements;
 public class BulletController : MonoBehaviour, IPoolable
 {
     public IObjectPool<GameObject> pool { get; set; }
+    //[SerializeField] private Sprite[] sprites;
 
     public float bulletSpeed = 3f;
 
     private Coroutine coroutine;
     
-    [SerializeField] private Sprite[] sprites;
-    private float dir = 1f;
-    private SpriteRenderer sprite;
+    private float dir;
+    //private SpriteRenderer sprite;
 
     private void OnEnable()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        //sprite = GetComponent<SpriteRenderer>();
         coroutine = StartCoroutine(CoMoveBullet());
     }
 
@@ -40,14 +40,15 @@ public class BulletController : MonoBehaviour, IPoolable
             yield return null;
         }
     }
-    public void SetInit(Transform firePoint)
+    public void Setting(Transform firePoint, float dir)
     {
-        switch (firePoint.gameObject.tag)
-        {
-            case "Player": dir = 1f; sprite.sprite = sprites[5]; break;
-            case "Enemy": dir = -1f; sprite.sprite = sprites[0]; break;
-        }
+        //switch (firePoint.gameObject.tag)
+        //{
+        //    case "Player": sprite.sprite = sprites[5]; gameObject.tag = "Player"; break;
+        //    case "Enemy": sprite.sprite = sprites[0]; gameObject.tag = "Enemy"; break;
+        //}
         transform.position = firePoint.position;
         transform.rotation = firePoint.rotation;
+        this.dir = dir;
     }
 }

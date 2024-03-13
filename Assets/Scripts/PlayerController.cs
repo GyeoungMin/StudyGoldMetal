@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         if (fire == 1 && Time.time >= lastFireTime + bulletBetTime)
         {
             lastFireTime = Time.time;
-            bulletGenerator.Shot(firePoint);
+            bulletGenerator.Shot(firePoint, BulletType.player);
         }
         playerAnimator.SetFloat("Horizontal", dirH);
     }
@@ -63,6 +63,6 @@ public class PlayerController : MonoBehaviour
     {
         cullHp -= damage;
         playerAnimator.SetTrigger("isDie");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

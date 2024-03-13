@@ -17,7 +17,7 @@ public class ObjectPoolManager
     //»ý¼ºÀÚ
     private ObjectPoolManager() { }
 
-    public void CreatePool<T>(GameObject parent, GameObject prefab, int poolSize) where T : IPoolable
+    public IObjectPool<GameObject> CreatePool<T>(GameObject parent, GameObject prefab, int poolSize) where T : IPoolable
     {
         this.parent = parent;
         this.prefab = prefab;
@@ -29,6 +29,8 @@ public class ObjectPoolManager
             var item = CreatePoolItem<T>();
             item.GetComponent<T>().pool.Release(item);
         }
+
+        return pool;
     }
 
     private GameObject CreatePoolItem<T>() where T : IPoolable

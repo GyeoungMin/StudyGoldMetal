@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private BulletGenerator bulletGenerator;
+    //[SerializeField] private AnimationClip dieAnim;
 
     private Coroutine coroutine;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,7 +22,13 @@ public class EnemyController : MonoBehaviour
 
     void Damaged()
     {
-        Destroy(gameObject);
+        var animation = GetComponent<Animation>();
+        animation.GetClip("Die");
+        animation.Play();
+        //if (!animation.isPlaying)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     void OnEnable()
@@ -36,7 +43,7 @@ public class EnemyController : MonoBehaviour
     {
         while (true)
         {
-            bulletGenerator.Shot(firePoint);
+            bulletGenerator.Shot(firePoint, BulletType.enemy);
             yield return new WaitForSeconds(0.125f);
         }
     }
