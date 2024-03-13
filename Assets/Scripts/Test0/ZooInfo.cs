@@ -6,13 +6,8 @@ public class ZooInfo
 {
     public List<AnimalInfo> animalInfos;
 
-    //public ZooInfo(List<AnimalInfo> animalInfos)
-    //{
-    //    this.animalInfos = animalInfos;
-    //}
-
-    public void Init()
+    public ZooInfo(List<AnimalInfo> animalInfos)
     {
-        animalInfos = new List<AnimalInfo>();
+        this.animalInfos = animalInfos;
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class HerbivoreInfo : AnimalInfo
 {
-    public int photosyntesis;
+    public int photosyntesis { get; set; }
+    //public override int AdditionalProperty => photosyntesis;
+
     //»ý¼ºÀÚ
     public HerbivoreInfo(string name, int type, int moveSpeed, int photosyntesis) : base(name, type, moveSpeed)
     {

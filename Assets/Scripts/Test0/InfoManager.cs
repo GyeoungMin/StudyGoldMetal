@@ -10,14 +10,12 @@ public class InfoManager
 
     private InfoManager() { }
 
-    public ZooInfo ZooInfo
-    {
-        get; set;
-    }
+    public ZooInfo zooInfo { get; set; }
+
     public void SaveLocal()
     {
         Debug.Log("<color=yellow>SaveLocal</color>");
-        var json = JsonConvert.SerializeObject(ZooInfo);
+        var json = JsonConvert.SerializeObject(zooInfo);
         string path = Path.Combine(Application.persistentDataPath, "zoo_info.json");
         Debug.Log(path);
         File.WriteAllText(path, json);

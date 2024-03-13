@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AnimalInfo : ZooInfo
+public class AnimalInfo
 {
-    enum AnimalType { Herbivore, Carnivore }
 
-    public string name;
-    public int type;
-    public int moveSpeed;
-    //public int damage;
-    //public int photosyntesis;
+    //public Dictionary<string, object> AdditionalProperties { get; } = new Dictionary<string, object>();
+    //public virtual T AdditionalProperty { get; }
+    public string name { get; set; }
+    public int type { get; set; }
+    public int moveSpeed { get; set; }
 
     //»ý¼ºÀÚ
     public AnimalInfo(string name, int type, int moveSpeed)
@@ -19,5 +14,4 @@ public class AnimalInfo : ZooInfo
         this.type = type;
         this.moveSpeed = moveSpeed;
     }
-
 }
