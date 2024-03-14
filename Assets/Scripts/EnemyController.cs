@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private BulletGenerator bulletGenerator;
+    [SerializeField] private ItemGenerator itemGenerator;
     //[SerializeField] private AnimationClip dieAnim;
 
     private Coroutine coroutine;
@@ -22,13 +23,9 @@ public class EnemyController : MonoBehaviour
 
     void Damaged()
     {
-        var animation = GetComponent<Animation>();
-        animation.GetClip("Die");
-        animation.Play();
-        //if (!animation.isPlaying)
-        //{
-        //    Destroy(gameObject);
-        //}
+        Animation anim = GetComponent<Animation>();
+        anim.Play("Explosion");
+        Destroy(gameObject, 1f);
     }
 
     void OnEnable()

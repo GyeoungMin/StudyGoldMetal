@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IItem
 {
-    public void Get() { }
+    public void Get();
 
-    public void Use() { }
+    public void Use();
 }

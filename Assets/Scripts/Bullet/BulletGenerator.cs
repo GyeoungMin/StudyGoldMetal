@@ -27,8 +27,8 @@ public class BulletGenerator : MonoBehaviour
         float dir = 1f;
         switch (type)
         {
-            case BulletType.player: bullet = playerBulletPool.Get(); dir = 1f; break;
-            case BulletType.enemy: bullet = enemyBulletPool.Get(); dir = -1f; break;
+            case BulletType.player: bullet = playerBulletPool.Get(); bullet.tag = "Player"; dir = 1f; break;
+            case BulletType.enemy: bullet = enemyBulletPool.Get(); bullet.tag = "Enemy"; dir = -1f; break;
         }
 
         //GameObject bullet = playerBulletPool.Get();

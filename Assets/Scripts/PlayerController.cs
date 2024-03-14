@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private float lastFireTime;
     private float bulletBetTime = 0.125f;
-    private float cullHp = 10f;
+    //private float cullHp = 10f;
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -56,13 +56,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damaged(2);
+        if (collision.CompareTag("Enemy"))
+        {
+            Damaged();
+        }
     }
 
-    void Damaged(float damage)
+    void Damaged()
     {
-        cullHp -= damage;
+        GetComponent<BoxCollider2D>().enabled = false;
         playerAnimator.SetTrigger("isDie");
-        //Destroy(gameObject);
+        Destroy(gameObject, 1f);
     }
 }
