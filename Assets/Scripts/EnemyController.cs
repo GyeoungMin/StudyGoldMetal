@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,39 +11,79 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private BulletGenerator bulletGenerator;
     [SerializeField] private ItemGenerator itemGenerator;
-    //[SerializeField] private AnimationClip dieAnim;
+    [SerializeField] private AnimationClip clip;
 
+    private Collider2D col;
+    private PlayableGraph graph;
     private Coroutine coroutine;
+    private SpriteRenderer spriteRenderer;
+    private Sprite sprite;
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+
+        sprite = spriteRenderer.sprite;
+        PlayAnimation(gameObject, clip);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<BulletController>().pool.Release(collision.gameObject);
-            Damaged();
+            col.enabled = false;
+            StartCoroutine(CoDamaged());
         }
     }
 
-    void Damaged()
+    IEnumerator CoDamaged()
     {
-        Animation anim = GetComponent<Animation>();
-        anim.Play("Explosion");
-        Destroy(gameObject, 1f);
+        graph.Play();
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            graph.Stop();
+            gameObject.SetActive(false);
+        }
     }
 
     void OnEnable()
     {
+        col.enabled = true;
+        spriteRenderer.sprite = sprite;
+        spriteRenderer.color = Color.white;
         coroutine = StartCoroutine(CoFire());
     }
+
     void OnDisable()
     {
-        StopCoroutine(coroutine);
+        StopAllCoroutines();
     }
+
     IEnumerator CoFire()
     {
         while (true)
         {
             bulletGenerator.Shot(firePoint, BulletType.enemy);
             yield return new WaitForSeconds(0.125f);
+        }
+    }
+
+    public void PlayAnimation(GameObject target, AnimationClip clip)
+    {
+        graph = PlayableGraph.Create();
+        var animator = target.AddComponent<Animator>();
+        var clipPlayable = AnimationClipPlayable.Create(graph, clip);
+        var animOutput = AnimationPlayableOutput.Create(graph, "Explosion", animator);
+        animOutput.SetSourcePlayable(clipPlayable);
+    }
+
+    private void OnDestroy()
+    {
+        if (graph.IsValid())
+        {
+            graph.Destroy();
         }
     }
 }
