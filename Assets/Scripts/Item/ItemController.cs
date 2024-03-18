@@ -31,7 +31,7 @@ public class ItemController : MonoBehaviour, IPoolable
             float x = Mathf.Clamp(transform.position.x, -2.3f, 2.3f);
             float y = Mathf.Clamp(transform.position.y, -5.5f, 4.5f);
             transform.position = new Vector2(x, y);
-            if (y <= -5.5f) { pool.Release(gameObject); }
+            if (y <= -5.5f) { pool.Release(this.gameObject); }
             else if(y >= 4.5f) { dir.y *= -1f; }
             else if(Mathf.Abs(x) >= 2.3f) { dir.x *= -1f; }
             yield return null;

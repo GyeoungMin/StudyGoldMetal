@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Item"))
         {
             collision.GetComponent<IItem>().Get();
+            collision.GetComponent<ItemController>().pool.Release(collision.gameObject);
         }
     }
 
