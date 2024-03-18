@@ -14,12 +14,12 @@ public class ItemGenerator : MonoBehaviour
 
     void Awake()
     {
-        boomPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(gameObject, boomItemPrefab, 3);
-        powerPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(gameObject, powerItemPrefab, 3);
-        coinPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(gameObject, coinItemPrefab, 3);
+        boomPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(gameObject, boomItemPrefab, 5);
+        powerPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(gameObject, powerItemPrefab, 5);
+        coinPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(gameObject, coinItemPrefab, 5);
     }
 
-    public void GetItem(Transform tr)
+    public void SpawnItem(Transform tr)
     {
         int random = Random.Range(0, 3);
         GameObject item = null;

@@ -9,17 +9,20 @@ public class EnemyController : MonoBehaviour
 {
 
     [SerializeField] private Transform firePoint;
-    [SerializeField] private BulletGenerator bulletGenerator;
-    [SerializeField] private ItemGenerator itemGenerator;
     [SerializeField] private AnimationClip clip;
 
+    private BulletGenerator bulletGenerator;
+    private ItemGenerator itemGenerator;
     private Collider2D col;
     private PlayableGraph graph;
     private Coroutine coroutine;
     private SpriteRenderer spriteRenderer;
     private Sprite sprite;
+
     private void Awake()
     {
+        bulletGenerator = FindObjectOfType<BulletGenerator>();
+        itemGenerator = FindObjectOfType<ItemGenerator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
 
@@ -33,6 +36,7 @@ public class EnemyController : MonoBehaviour
         {
             collision.GetComponent<BulletController>().pool.Release(collision.gameObject);
             col.enabled = false;
+            StopCoroutine(coroutine);
             StartCoroutine(CoDamaged());
         }
     }
@@ -44,6 +48,7 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             graph.Stop();
+            itemGenerator.SpawnItem(transform);
             gameObject.SetActive(false);
         }
     }

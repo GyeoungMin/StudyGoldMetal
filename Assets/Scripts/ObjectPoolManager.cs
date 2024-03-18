@@ -21,9 +21,9 @@ public class ObjectPoolManager
     {
         this.parent = parent;
         this.prefab = prefab;
-        
+
         pool = new ObjectPool<GameObject>(CreatePoolItem<T>, OnGetPool, OnReleasePool, OnDestroyPool, true, poolSize, poolSize * 5);
-        
+
         for (int i = 0; i < poolSize; i++)
         {
             var item = CreatePoolItem<T>();

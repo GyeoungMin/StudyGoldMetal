@@ -132,8 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3465593315330759181}
-  bulletGenerator: {fileID: 0}
-  itemGenerator: {fileID: 0}
   clip: {fileID: 7400000, guid: f54e92dc69ccda14183aef939e44114a, type: 2}
 --- !u!50 &8931640216067580686
 Rigidbody2D:

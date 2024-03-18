@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6181279733863844457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,14 +44,13 @@ GameObject:
   - component: {fileID: 4461472214669890365}
   - component: {fileID: 7011521022353356386}
   - component: {fileID: 5701996697904924779}
-  - component: {fileID: 5132072075381758975}
   m_Layer: 0
   m_Name: Enemy A
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7317444862320423071
 Transform:
   m_ObjectHideFlags: 0
@@ -154,7 +153,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7115399711897152297}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -195,21 +194,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 846071267257147646}
-  bulletGenerator: {fileID: 0}
-  itemGenerator: {fileID: 0}
---- !u!111 &5132072075381758975
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7115399711897152297}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 758d993efce9f8f4bb2f87766373c793, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  clip: {fileID: 7400000, guid: f54e92dc69ccda14183aef939e44114a, type: 2}
