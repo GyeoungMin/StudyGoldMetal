@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  bulletGenerator: {fileID: 0}
 --- !u!95 &4839731583253254045
 Animator:
   serializedVersion: 5

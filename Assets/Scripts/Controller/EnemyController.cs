@@ -34,7 +34,8 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<BulletController>().pool.Release(collision.gameObject);
+            collision.GetComponentInParent<BulletController>()?.pool.Release(collision.transform.parent.gameObject);
+            //collision.GetComponent<BulletController>().pool.Release(collision.gameObject);
             col.enabled = false;
             StopCoroutine(coroutine);
             StartCoroutine(CoDamaged());
@@ -70,7 +71,7 @@ public class EnemyController : MonoBehaviour
     {
         while (true)
         {
-            bulletGenerator.Shot(firePoint, BulletType.enemy);
+            bulletGenerator.Shot(firePoint, BulletType.enemy, 0);
             yield return new WaitForSeconds(0.125f);
         }
     }

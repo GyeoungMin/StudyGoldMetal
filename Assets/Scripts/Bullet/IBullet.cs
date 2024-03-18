@@ -1,27 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.U2D;
-
 public interface IBullet
 {
-    public void Setting();
+    public float damage { get; set; }
+
+    public void SetDamage();
 }
-
-//public class PlayerBullet : MonoBehaviour, IBullet
-//{
-//    public void Setting()
-//    {
-
-//    }
-
-
-//}
-
-//public class EnemyBullet : MonoBehaviour, IBullet
-//{
-//    public void Setting()
-//    {
-
-//    }
-//}

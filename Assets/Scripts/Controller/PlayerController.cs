@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed = 3f;
+    [SerializeField] float speed = 5f;
 
     private BulletGenerator bulletGenerator;
     private Animator playerAnimator;
@@ -17,17 +18,24 @@ public class PlayerController : MonoBehaviour
     private float boom;
     
     private int boomCount;
-    private int power;
+    private int powerLevel;
 
-    private float lastFireTime;
-    private float bulletBetTime = 0.125f;
+    private float fireCooldownTime = 0.125f;
+    private bool isFireCooldown = false;
+    private bool isBoomCooldown = false;
     //private float cullHp = 10f;
+
     void Awake()
     {
         playerAnimator = GetComponent<Animator>();
         bulletGenerator = FindObjectOfType<BulletGenerator>();
         boomCount = 3;
-        power = 1;
+        powerLevel = 0;
+    }
+    private void OnEnable()
+    {
+        boomCount = 3;
+        powerLevel = 0;
     }
 
     void FixedUpdate()
@@ -37,14 +45,16 @@ public class PlayerController : MonoBehaviour
 
         Move();
 
-        if (fire == 1)
+        if (fire == 1 && !isFireCooldown)
         {
             Fire(firePoint);
+            StartCoroutine(CoFireCooldown());
         }
 
-        if (boom == 1)
+        if (boom == 1 && !isBoomCooldown)
         {
             UseBoom();
+            StartCoroutine(CoBoomCooldown());
         }
     }
 
@@ -70,11 +80,13 @@ public class PlayerController : MonoBehaviour
 
     void Fire(Transform firePoint)
     {
-        if(Time.time >= lastFireTime + bulletBetTime)
-        {
-            lastFireTime = Time.time;
-            bulletGenerator.Shot(firePoint, BulletType.player);
-        }
+        bulletGenerator.Shot(firePoint, BulletType.player, powerLevel);
+    }
+    IEnumerator CoFireCooldown()
+    {
+        isFireCooldown = true;
+        yield return new WaitForSeconds(fireCooldownTime);
+        isFireCooldown = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -115,8 +127,15 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<UIManager>().UIBooms(boomCount);
     }
 
+    IEnumerator CoBoomCooldown()
+    {
+        isBoomCooldown = true;
+        yield return new WaitForSeconds(3f);
+        isBoomCooldown = false;
+    }
+
     public void PowerUp()
     {
-        power++;
+        powerLevel++;
     }
 }
