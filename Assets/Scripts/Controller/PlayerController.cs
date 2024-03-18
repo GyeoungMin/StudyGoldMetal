@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject followerPrefab;
     [SerializeField] float speed = 5f;
 
     private BulletGenerator bulletGenerator;
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float dirV;
     private float fire;
     private float boom;
-    
+
     private int boomCount;
     private int powerLevel;
 
@@ -136,6 +137,14 @@ public class PlayerController : MonoBehaviour
 
     public void PowerUp()
     {
-        powerLevel++;
+        if (powerLevel < 5)
+        {
+            powerLevel++;
+            if (powerLevel == 5)
+            {
+                Instantiate(followerPrefab);
+                powerLevel = 4;
+            }
+        }
     }
 }
