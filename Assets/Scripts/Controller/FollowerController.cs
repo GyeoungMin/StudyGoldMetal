@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class FollowerController : MonoBehaviour
+public class FollowerController : MonoBehaviour, IPoolable
 {
+    public IObjectPool<GameObject> pool {  get; set; }
     private Transform target; // 따라다닐 대상 오브젝트
     public float smoothTime = 0.3f; // 부드러운 이동에 사용될 시간
 

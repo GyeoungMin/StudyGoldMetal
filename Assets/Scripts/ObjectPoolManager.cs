@@ -9,8 +9,6 @@ public class ObjectPoolManager
     public static readonly ObjectPoolManager Instance = new ObjectPoolManager();
 
     public IObjectPool<GameObject> pool;
-    public IObjectPool<GameObject> playerPool { get; private set; }
-    public IObjectPool<GameObject> enemyPool { get; private set; }
     private GameObject parent;
     private GameObject prefab;
 

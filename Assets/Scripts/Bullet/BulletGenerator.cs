@@ -30,7 +30,8 @@ public class BulletGenerator : MonoBehaviour
             var poolingObject = ObjectPoolManager.Instance.CreatePool<IPoolable>(go, prefab, 20);
             playerBulletPools.Add(poolingObject);
         }
-        enemyBulletPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(enemyBulletGo, enemyBulletPrefab, 20);
+        //enemyBulletPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(enemyBulletGo, enemyBulletPrefab, 20);
+        enemyBulletPool = ObjectPoolManager2.Instance.CreateObjectPool<IPoolable>(enemyBulletGo, enemyBulletPrefab, 20);
         followerBulletPool = ObjectPoolManager.Instance.CreatePool<IPoolable>(followerBulletGo, followerBulletPrefab, 20);
 
     }

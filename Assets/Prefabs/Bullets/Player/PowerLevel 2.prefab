@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3646218129129525929}
   - component: {fileID: 5538458756053923447}
   m_Layer: 0
-  m_Name: PowerLevel2
+  m_Name: PowerLevel 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
